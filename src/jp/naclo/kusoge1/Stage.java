@@ -19,11 +19,13 @@ public class Stage {
 	private int unchiNum = 0;
 	private double rate;
 
+	private final int MAX_UNCHI_SIZE = 10;
+
 	private BufferedImage backImg;
 
 	public Stage() {
 		myChara = new MelonChara();
-		myUChara = new UnchiChara[10];
+		myUChara = new UnchiChara[MAX_UNCHI_SIZE];
 		for(int i = 0; i < myUChara.length; i++) {
 			myUChara[i] = new UnchiChara();
 		}
@@ -39,6 +41,7 @@ public class Stage {
 	}
 
 	public boolean update(ShareInfo sinfo) {
+		//自機移動
 		myChara.update(sinfo);
 
 
@@ -55,13 +58,7 @@ public class Stage {
 			}
 		}
 
-		for(int i = 0; i < myUChara.length; i++) {
-			//unchi表示されてるときのみ
-			if(myUChara[i].isVisible()) {
-				myUChara[i].update(sinfo);
-			}
-		}
-
+		//敵移動
 		for(int i = 0; i < myUChara.length; i++) {
 			//unchi表示されてるときのみ
 			if(myUChara[i].isVisible()) {
@@ -72,6 +69,7 @@ public class Stage {
 			}
 		}
 
+		//当たり判定
 		for(int i = 0; i < myUChara.length; i++) {
 			//unchi表示されてるときのみ
 			if(myUChara[i].isVisible()) {
